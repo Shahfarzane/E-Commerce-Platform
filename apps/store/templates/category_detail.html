@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block content%}
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h1 class="title"> {{category.title}}</h1>
 <div class="column is-multiline">
   {% for product in products %}
   <div class="column is-3">
@@ -13,12 +17,10 @@
         </div>
       </div>
       <footer class="card-footer">
-      <a href="{% url 'product_detail' product.category.slug product.slug %}" class="card-footer-item"> View </a>
+      <a href="{% url 'product_detail' category.slug product.slug %}" class="card-footer-item"> View </a>
       </footer>
     </div>
   </div>
    {% endfor %} 
 </div>
-<h1 class="title">The FrontPage</h1>
-
-{% endblock%}
+{%endblock%}
