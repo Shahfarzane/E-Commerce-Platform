@@ -1,80 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} {% endblock %} Ecommerce</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-</head>
-<body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-          </a>
-      
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-      
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item">
-              Home
-            </a>
-      
-            <a class="navbar-item">
-              {% for category in menu_categories %}
-              <a href="{% url 'category_detail' category.slug %}" class="navbar-item">{{category.title}}</a>
-              {%endfor %}
-            </a>
-            <div class="navbar-item">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+		<link rel="stylesheet" href="{% static 'main.css' %}">
+	</head>
 
-                          <a href="{% url 'cart' %}" class="button is-primary">Cart</a>
-</div>
-      
-            </div>
-      
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <a class="button is-light">
-                  Log in
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    <section class="section">
+	<body>
+		<nav class="navbar is-dark">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="{% url 'frontpage' %}">Shop</a>
 
-        {% block content %}
-        {% endblock %}
-    </section>
-    <footer class="footer">
-    <div class="columns">
-  <div class="column is-4">
-  <h2 class="subtitle">Ecommerce Platfor</h2>
-  </div>
+				<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-navbar">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+			</div>
+
+			<div id="main-navbar" class="navbar-menu">
+				<div class="navbar-end">
+                    {% for category in menu_categories %}
+                        <a href="{% url 'category_detail' category.slug %}" class="navbar-item">{{ category.title }}</a>
+					{% endfor %}
+					
+				
+				</div>
+			</div>
+		</nav>
+
+		<section class="section">
+			{% block content %}
+            {% endblock %}
+		</section>
+
+		<footer class="footer">
+			<div class="columns">
+				
+
 				<div class="column is-8">
 					<a href="{% url 'contact' %}" class="navbar-item">Contact</a>
 					<a href="{% url 'about' %}" class="navbar-item">About</a>
 				</div>
-    </div>
-    </footer>
+			</div>
+		</footer>
 
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vuex@3.5.1/dist/vuex.js"></script>
+	
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    {% block scripts %}
-    
-    
-    {% endblock %}
-</body>
+		{% block scripts %}
+		{% endblock %}
+	</body>
 </html>

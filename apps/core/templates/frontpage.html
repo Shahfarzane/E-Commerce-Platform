@@ -1,26 +1,52 @@
-{% extends 'base.html' %} {% block content%}
-{% block title %}Welcome to| {% endblock %}
+{% extends 'base.html' %}
 
-<div class="column is-multiline">
-  {% for product in products %}
-  <div class="column is-3">
-    <div class="card">
-      <div class="card-content">
-        <div class="media">
-          <div class="media-content">
-          <p class="title is-4"> 
-          {{product.title}}</p>
-          <p class="subtitle is-6">${{product.price}}</p>
+{% block title %}Welcome | {% endblock %}
+
+{% block content %}
+
+<div class="container">
+      <div class="section">
+        <div class="columns">
+          <div class="column has-text-centered">
+            <h1 class="title">Products</h1><br>
           </div>
         </div>
-      </div>
-      <footer class="card-footer">
-      <a href="{% url 'product_detail' product.category.slug product.slug %}" class="card-footer-item"> View </a>
-      </footer>
-    </div>
-  </div>
-   {% endfor %} 
-</div>
-<h1 class="title">The FrontPage</h1>
+                
 
-{% endblock%}
+        <div id="app" class="row columns is-multiline">
+            {% for product in products %}
+          <div v-for="card in cardData" key="card.id" class="column is-4">
+              
+            <div class="card large">
+              <div class="card-image">
+                <figure class="image is-16by9">
+                  <img src="{{ product.thumbnail }}" alt="Image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+
+                  </div>
+                  <div class="media-content">
+                    <p class="title is-4 no-padding">{{ product.title }}</p>
+                    <p>
+                      <span class="title is-6">
+                         ${{ product.price }} </a> </span> </p>
+                   <a href="{% url 'product_detail' product.category.slug product.slug %}" class="card-footer-item"> View </a>
+                  </div>
+                </div>
+                <div class="content">
+                  {{card.content}}
+                  <div class="background-icon"><span class="icon-twitter"></span></div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+           {% endfor %}
+        </div>
+        
+      </div>
+    </div>
+    {% endblock %}
